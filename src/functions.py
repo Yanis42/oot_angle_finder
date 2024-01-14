@@ -309,7 +309,7 @@ def getArguments():
         "--start-angles",
         dest="startAngles",
         nargs="*",
-        type=int,
+        type=str,
         default="",
         help="usage: ``-s 0x8000 0x4000 0xC000 0x0000",
         required=True,
@@ -330,11 +330,11 @@ def getArguments():
         "-a",
         "--avoid-angles",
         dest="avoidAngles",
-        nargs=2,
+        nargs="*",
         type=listOfTuple,
         default="",
         help="usage: ``-a 0xB168,0xB188 0xABAB,0x1234",
-        required=True,
+        required=False,
     )
 
     return parser.parse_args()

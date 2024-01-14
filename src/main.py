@@ -86,7 +86,9 @@ if __name__ == "__main__":
             grp = grp.replace("_", " ")
         allowed_groups.append(grp)
 
-    start_angles = args.startAngles
+    for angle in args.startAngles:
+        start_angles.append(int(angle, 16))
+
     find_angles = args.findAngles
     avoid_angles = args.avoidAngles
 
