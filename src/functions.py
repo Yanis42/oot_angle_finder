@@ -18,9 +18,7 @@ from constants import (
 )
 
 
-def maybe_add_edge(
-    graph: list[Node], edge: Edge, to_angle: Node, avoid_angles: list[tuple[int, int]]
-):
+def maybe_add_edge(graph: list[Node], edge: Edge, to_angle: Node, avoid_angles: list[tuple[int, int]]):
     """
     Add an edge to an angle, but only if the edge is the fastest way to get to
     the node for a given motion.
@@ -215,9 +213,7 @@ def print_path(angle: int, path):
             iterations += 1
         elif prev_motion:
             # once it stops repeating, add it to the motion list
-            motions_output.append(
-                {"motion": f"{iterations} {prev_motion}", "angle": f"0x{angle:04x}"}
-            )
+            motions_output.append({"motion": f"{iterations} {prev_motion}", "angle": f"0x{angle:04x}"})
             iterations = 1
 
         # update the angle using the current motion and set prev_motion
@@ -225,9 +221,7 @@ def print_path(angle: int, path):
         prev_motion = motion
 
     # finally, run one last time
-    motions_output.append(
-        {"motion": f"{iterations} {prev_motion}", "angle": f"0x{angle:04x}"}
-    )
+    motions_output.append({"motion": f"{iterations} {prev_motion}", "angle": f"0x{angle:04x}"})
 
     # get the padding amount based on the length for the largest motion string
     text_length = len(max([output["motion"] for output in motions_output], key=len))
@@ -236,9 +230,7 @@ def print_path(angle: int, path):
         print(f"{motion['motion']:<{text_length}} to {motion['angle']}")
 
 
-def collect_paths(
-    graph: list[Node], angle: int, sample_size: int = 20, number: int = 10
-):
+def collect_paths(graph: list[Node], angle: int, sample_size: int = 20, number: int = 10):
     """Sample 'sample_size' paths, returning the 'number' cheapest of those.
 
     Returns a list of
@@ -289,9 +281,7 @@ def getArguments():
         except:
             raise ArgumentTypeError("values must be x,y")
 
-    parser = Parser(
-        description="Fix various things related to assets for the OoT Decomp"
-    )
+    parser = Parser(description="Fix various things related to assets for the OoT Decomp")
 
     parser.add_argument(
         "-g",
