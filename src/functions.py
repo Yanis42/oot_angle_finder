@@ -300,7 +300,7 @@ def getArguments():
         nargs="*",
         type=str,
         default="",
-        help="usage: ``-g basic sword target_enabled",
+        help="usage: -g basic sword target_enabled",
         required=True,
     )
 
@@ -311,7 +311,7 @@ def getArguments():
         nargs="*",
         type=str,
         default="",
-        help="usage: ``-s 0x8000 0x4000 0xC000 0x0000",
+        help="usage: -s 0x8000 0x4000 0xC000 0x0000",
         required=True,
     )
 
@@ -322,7 +322,7 @@ def getArguments():
         nargs="*",
         type=str,
         default="",
-        help="usage: ``-f 0x5E19 0x5E07 0x5C58 0xACA0",
+        help="usage: -f 0x5E19 0x5E07 0x5C58 0xACA0",
         required=True,
     )
 
@@ -333,7 +333,7 @@ def getArguments():
         nargs="*",
         type=listOfTuple,
         default="",
-        help="usage: ``-a 0xB168,0xB188 0xABAB,0x1234",
+        help="usage: -a 0xB168,0xB188 0xABAB,0x1234",
         required=False,
     )
 

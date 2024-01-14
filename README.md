@@ -3,6 +3,16 @@ Find the quickest path between any two angles in Ocarina of Time with a graph se
 
 # Usage
 
+## Console Arguments:
+- ``--allowed-groups`` (``-g``): ``usage: -g basic sword target_enabled``
+- ``--start-angles`` (``-s``): ``usage: -s 0x8000 0x4000 0xC000 0x0000``
+- ``--find-angles`` (``-f``): ``usage: -f 0x5E19 0x5E07 0x5C58 0xACA0``
+- ``--avoid-angles`` (``-a``): ``usage: -a 0xB168,0xB188 0xABAB,0x1234``
+
+Note: for allowed groups, spaces must be replaced by underscores (`` `` -> ``_``)
+
+Example: ``python3 src/main.py -g basic target_enabled -s 0x8000 0xC000 -f 0x5E19 0x5E17 -a 0xACA0,0xFFFF``
+
 ## Movement Search Types
 Modify `ALLOWED_GROUPS` in `angle_finder.py` to change which movements are allowed for angle finding. 
 
