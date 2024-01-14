@@ -57,7 +57,7 @@ def ess_up_adjust_noncached(angle):
 CAMERA_SNAPS = []
 
 try:
-    with gzip.open("camera_snaps.txt.gz", "rt") as cam:
+    with gzip.open("res/camera_snaps.txt.gz", "rt") as cam:
         for line in cam:
             if line.strip() == "False":
                 CAMERA_SNAPS.append(False)
@@ -65,7 +65,7 @@ try:
                 CAMERA_SNAPS.append(int(line))
 except:
     camera_angles = []
-    with open("camera_favored.txt", "r") as f:
+    with open("res/camera_favored.txt", "r") as f:
         for line in f:
             camera_angles.append(int(line.strip(), 16))
 
@@ -75,7 +75,7 @@ except:
         CAMERA_SNAPS.append(ess_up_adjust_noncached(angle))
     print("\nDone.")
 
-    with gzip.open("camera_snaps.txt.gz", "wt") as cam:
+    with gzip.open("res/camera_snaps.txt.gz", "wt") as cam:
         for angle in CAMERA_SNAPS:
             print(angle, file=cam)
 
