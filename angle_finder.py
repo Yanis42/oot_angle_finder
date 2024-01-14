@@ -27,8 +27,8 @@ import motions
 #
 # Go to the bottom of this file to select angles and run the search.
 
-getcontext().prec = 4 # Decimal to 4 places
-sys.setrecursionlimit(5000) # basic searches can get a lil' wild
+getcontext().prec = 4  # Decimal to 4 places
+sys.setrecursionlimit(5000)  # basic searches can get a lil' wild
 
 COST_FLEX = Decimal(3.0)
 COST_TABLE = {}
@@ -224,7 +224,7 @@ def edges_out(graph, angle, last_motion, last_cost):
         # misses some valid edges, but it doesn't seem to matter much
         return
 
-    for (motion, cost_increase) in COST_TABLE[last_motion].items():
+    for motion, cost_increase in COST_TABLE[last_motion].items():
         new_angle = motions.table[motion](angle)
 
         if new_angle is None:
@@ -350,8 +350,8 @@ def navigate_all(graph, angle, path=None, seen=None, flex=COST_FLEX):
 
 def print_path(angle, path):
     # keep track of repeated motions to simplify the path reading
-    prev_motion    = None
-    iterations     = 1
+    prev_motion = None
+    iterations = 1
     motions_output = []
 
     print("start at {:#06x}".format(angle))
@@ -362,10 +362,9 @@ def print_path(angle, path):
             iterations += 1
         elif prev_motion:
             # once it stops repeating, add it to the motion list
-            motions_output.append({
-                "motion": f"{iterations} {prev_motion}",
-                "angle":  f"0x{angle:04x}"
-            })
+            motions_output.append(
+                {"motion": f"{iterations} {prev_motion}", "angle": f"0x{angle:04x}"}
+            )
             iterations = 1
 
         # update the angle using the current motion and set prev_motion
@@ -373,10 +372,9 @@ def print_path(angle, path):
         prev_motion = motion
 
     # finally, run one last time
-    motions_output.append({
-        "motion": f"{iterations} {prev_motion}",
-        "angle":  f"0x{angle:04x}"
-    })
+    motions_output.append(
+        {"motion": f"{iterations} {prev_motion}", "angle": f"0x{angle:04x}"}
+    )
 
     # get the padding amount based on the length for the largest motion string
     text_length = len(max([output["motion"] for output in motions_output], key=len))
@@ -441,19 +439,16 @@ ALLOWED_GROUPS = ["basic", "target enabled", "no carry", "c-up frame turn"]
 initialize_cost_table()
 
 if __name__ == "__main__":
-
     avoid = [
-    #    examples, also note that when crossing
-    #    0x0000 -> 0xffff, you have to split it up.
-    #
-    #    (0xdeb9, 0xffff),
-    #    (0x0000, 0x6338)
+        #    examples, also note that when crossing
+        #    0x0000 -> 0xffff, you have to split it up.
+        #
+        #    (0xdeb9, 0xffff),
+        #    (0x0000, 0x6338)
     ]
 
     # Create a graph starting at the given angles.
-    graph = explore([
-        0x0000, 0x4000, 0x8000, 0xc000
-    ], avoid)
+    graph = explore([0x0000, 0x4000, 0x8000, 0xC000], avoid)
     paths = []
 
     # Collect the 5 fastest sequences of the first 50 visited.  The fastest

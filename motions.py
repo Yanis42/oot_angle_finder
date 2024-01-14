@@ -1,17 +1,17 @@
 import gzip
 
+
 # generally just ess up, but also considered adjusting
 # the camera when turning left / right / 180
 def ess_up_adjust_noncached(angle):
-
     # camera bullshit as determined by manual testing
 
     # these snap to 0x4000
-    if (0x385F <= angle < 0x4000):
+    if 0x385F <= angle < 0x4000:
         return 0x4000
 
     # these snap to 0x8000
-    if (0x794F <= angle < 0x8000):
+    if 0x794F <= angle < 0x8000:
         return 0x8000
 
     # these snap to 0xc001
@@ -86,6 +86,7 @@ def ess_up_adjust(angle):
 
 # basic movement options
 
+
 def ess_left(angle):
     return angle + 0x0708
 
@@ -118,6 +119,7 @@ def turn_180(angle):
 # no_carry movement options. these can be
 # executed when Link isn't holding anything
 
+
 def sidehop_sideroll_left(angle):
     return angle + 0x1CD8
 
@@ -144,6 +146,7 @@ def backflip_sideroll(angle):
 
 # sword-related movement
 
+
 def sword_spin_shield_cancel(angle):
     return angle - 0x0CCD
 
@@ -161,6 +164,7 @@ def hammer_shield_cancel(angle):
 
 
 # perfect corner shield turns (n64 only)
+
 
 def shield_topright(angle):
     angle = ess_up_adjust(angle)
@@ -189,11 +193,14 @@ def shield_bottomright(angle):
         return None
     return angle - 0x6000
 
+
 def cup_frameturnleft(angle):
-    return angle + 0x12c
+    return angle + 0x12C
+
 
 def cup_frameturnright(angle):
-    return angle - 0x12c
+    return angle - 0x12C
+
 
 table = {
     "ess up": ess_up_adjust,
