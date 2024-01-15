@@ -100,7 +100,7 @@ try:
                 else:
                     CAMERA_SNAPS.append(int(line))
 except Exception as e:
-    raise print(e)
+    raise Exception(str(e))
 
 
 def ess_up_adjust(angle):
