@@ -73,8 +73,8 @@ try:
         snapPath = snapPath.replace("/..", "")
 
     print(repr(snapPath))
-    if not os.path.isfile(snapPath):
-        raise FileNotFoundError
+    # if not os.path.isfile(snapPath):
+    #     raise FileNotFoundError
 
     print("test 2")
     if not os.path.isfile(f"{snapPath}.gz"):
