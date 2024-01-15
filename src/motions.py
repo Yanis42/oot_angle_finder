@@ -1,4 +1,5 @@
 import gzip
+import os
 
 
 # generally just ess up, but also considered adjusting
@@ -55,9 +56,12 @@ def ess_up_adjust_noncached(angle):
 
 
 CAMERA_SNAPS = []
+snapPath = os.path.dirname(os.path.abspath(__file__)) + "/../res/camera_snaps.txt"
+if not os.path.isfile(snapPath):
+    snapPath = snapPath.replace("/..", "")
 
 try:
-    with gzip.open("res/camera_snaps.txt.gz", "rt") as cam:
+    with gzip.open(f"{snapPath}.gz", "rt") as cam:
         for line in cam:
             if line.strip() == "False":
                 CAMERA_SNAPS.append(False)
@@ -65,7 +69,7 @@ try:
                 CAMERA_SNAPS.append(int(line))
 except:
     camera_angles = []
-    with open("res/camera_favored.txt", "r") as f:
+    with open(snapPath, "r") as f:
         for line in f:
             camera_angles.append(int(line.strip(), 16))
 
@@ -75,7 +79,7 @@ except:
         CAMERA_SNAPS.append(ess_up_adjust_noncached(angle))
     print("\nDone.")
 
-    with gzip.open("res/camera_snaps.txt.gz", "wt") as cam:
+    with gzip.open(f"{snapPath}.gz", "wt") as cam:
         for angle in CAMERA_SNAPS:
             print(angle, file=cam)
 
