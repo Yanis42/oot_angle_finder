@@ -71,10 +71,12 @@ try:
     snapPath = f"{get_data_folder()}/../res/camera_snaps.txt"
     if not os.path.isfile(snapPath):
         snapPath = snapPath.replace("/..", "")
+
+    print(repr(snapPath))
     if not os.path.isfile(snapPath):
-        print(repr(snapPath))
         raise FileNotFoundError
 
+    print("test 2")
     if not os.path.isfile(f"{snapPath}.gz"):
         camera_angles = []
         with open(snapPath, "r") as f:

@@ -18,13 +18,13 @@ jobs:
             BUILD_ARGS: -F -w --add-data "res;res" src/main.py
             CMD_EXEC: PyInstaller
             FILE_TYPE: ".exe"
-            Z64TARGET: win32
+            BUILD_TEST_ARGS: -g basic target_enabled -s 0x8000 0xC000 -f 0x5E19 0x5E17 -a 0xACA0,0xFFFF
           - os: ubuntu-latest
             BUILD_NAME: Dev_AngleFinderCLI_Linux
             BUILD_ARGS: -F -w --add-data "res:res" src/main.py
             CMD_EXEC: pyinstaller
             FILE_TYPE: ""
-            Z64TARGET: linux64
+            BUILD_TEST_ARGS: -g basic target_enabled -s 0x8000 0xC000 -f 0x5E19 0x5E17 -a 0xACA0,0xFFFF
     steps:
     - uses: actions/checkout@v3
       with:
@@ -44,3 +44,5 @@ jobs:
       with:
         name: ${{ matrix.BUILD_NAME }}
         path: dist/${{ matrix.BUILD_NAME }}${{ matrix.FILE_TYPE }}
+    - name: Test Build
+      run: dist/${{ matrix.BUILD_NAME }}${{ matrix.FILE_TYPE }} ${{ matrix.BUILD_TEST_ARGS }}
