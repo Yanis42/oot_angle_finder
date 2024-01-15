@@ -59,12 +59,10 @@ def ess_up_adjust_noncached(angle):
 # from https://stackoverflow.com/a/70405825
 def get_data_folder():
     # path of your data in same folder of main .py or added using --add-data
-    if getattr(sys, 'frozen', False):
+    if getattr(sys, "frozen", False):
         data_folder_path = sys._MEIPASS
     else:
-        data_folder_path = os.path.dirname(
-            os.path.abspath(sys.modules['__main__'].__file__)
-        )
+        data_folder_path = os.path.dirname(os.path.abspath(sys.modules["__main__"].__file__))
     return data_folder_path
 
 
