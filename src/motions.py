@@ -62,19 +62,21 @@ def get_data_folder():
     if getattr(sys, "frozen", False):
         data_folder_path = sys._MEIPASS
     else:
-        data_folder_path = os.path.dirname(os.path.abspath(sys.modules["__main__"].__file__))
+        data_folder_path = os.path.dirname(os.path.abspath(sys.modules["__main__"].__file__))[:-4]
     return data_folder_path
 
 
 CAMERA_SNAPS = []
 try:
-    snapPath = f"../res/camera_snaps.txt"
-    if not os.path.isfile(snapPath):
-        snapPath = snapPath.replace("../", "./")
+    basePath = f"{get_data_folder()}/res/"
+    snapPath = f"{basePath}/camera_snaps.txt"
+    favPath = f"{basePath}/camera_favored.txt"
+    # if not os.path.isfile(snapPath):
+    #     snapPath = snapPath.replace("../", "./")
 
     if not os.path.isfile(f"{snapPath}.gz"):
         camera_angles = []
-        with open(snapPath, "r") as f:
+        with open(favPath, "r") as f:
             for line in f:
                 camera_angles.append(int(line.strip(), 16))
 
