@@ -68,38 +68,25 @@ def get_data_folder():
 
 CAMERA_SNAPS = []
 try:
-    snapPath = f"{get_data_folder()}/../res/camera_snaps.txt"
+    snapPath = f"../res/camera_snaps.txt"
     if not os.path.isfile(snapPath):
-        snapPath = snapPath.replace("/..", "")
-
-    snapPath2 = os.path.dirname(os.path.abspath(__file__)) + "/../res/camera_snaps.txt"
-    if not os.path.isfile(snapPath2):
-        # temp fix for executables
-        snapPath2 = snapPath2.replace("/..", "")
-
-    print(repr(snapPath), repr(snapPath2))
-    # if not os.path.isfile(snapPath):
-    #     raise FileNotFoundError
+        snapPath = snapPath.replace("../", "./")
 
     if not os.path.isfile(f"{snapPath}.gz"):
-        print("test 1")
         camera_angles = []
-        with open(snapPath2, "r") as f:
+        with open(snapPath, "r") as f:
             for line in f:
                 camera_angles.append(int(line.strip(), 16))
 
-        print("test 2")
         for angle in range(0xFFFF + 1):
             if (angle % 0x1000) == 0:
                 print(f"Caching camera movements ({hex(angle)})...", end="\r")
             CAMERA_SNAPS.append(ess_up_adjust_noncached(angle))
         print("\nDone.")
 
-        print("test 3")
         with gzip.open(f"{snapPath}.gz", "wt") as cam:
             for angle in CAMERA_SNAPS:
                 print(angle, file=cam)
-        print("test 4")
     else:
         with gzip.open(f"{snapPath}.gz", "rt") as cam:
             for line in cam:
