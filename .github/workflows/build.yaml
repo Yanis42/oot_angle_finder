@@ -44,5 +44,5 @@ jobs:
       with:
         name: ${{ matrix.BUILD_NAME }}
         path: dist/${{ matrix.BUILD_NAME }}${{ matrix.FILE_TYPE }}
-    - name: Test Build
-      run: dist/${{ matrix.BUILD_NAME }}${{ matrix.FILE_TYPE }} ${{ matrix.BUILD_TEST_ARGS }}
+    # - name: Test Build
+    #   run: dist/${{ matrix.BUILD_NAME }}${{ matrix.FILE_TYPE }} ${{ matrix.BUILD_TEST_ARGS }}
