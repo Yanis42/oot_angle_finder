@@ -275,11 +275,13 @@ def getArguments():
     """Initialisation of the argument parser"""
 
     def listOfTuple(input: str):
-        try:
-            x, y = map(str, input.split(","))
-            return int(x, 16), int(y, 16)
-        except:
-            raise ArgumentTypeError("values must be x,y")
+        if len(input) > 0:
+            try:
+                x, y = map(str, input.split(","))
+                return int(x, 16), int(y, 16)
+            except:
+                raise ArgumentTypeError("values must be x,y")
+        return None
 
     parser = Parser(description="Fix various things related to assets for the OoT Decomp")
 

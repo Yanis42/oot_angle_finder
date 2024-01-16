@@ -95,6 +95,9 @@ if __name__ == "__main__":
     assert len(allowed_groups) > 0
     assert len(start_angles) > 0
     assert len(find_angles) > 0
-    assert len(avoid_angles) > 0
+    if avoid_angles is not None:
+        assert len(avoid_angles) > 0
+    else:
+        avoid_angles = []
 
     main()
