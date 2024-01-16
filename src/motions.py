@@ -71,8 +71,6 @@ try:
     basePath = f"{get_data_folder()}/res/"
     snapPath = f"{basePath}/camera_snaps.txt"
     favPath = f"{basePath}/camera_favored.txt"
-    # if not os.path.isfile(snapPath):
-    #     snapPath = snapPath.replace("../", "./")
 
     if not os.path.isfile(f"{snapPath}.gz"):
         camera_angles = []
