@@ -31,13 +31,13 @@ jobs:
             BUILD_ARGS: -F -w --add-data "res;res" src/main.py
             CMD_EXEC: PyInstaller
             FILE_TYPE: ".exe"
-            Z64TARGET: win32
+            BUILD_TEST_ARGS: -g basic target_enabled -s 0x8000 0xC000 -f 0x5E19 0x5E17 -a 0xACA0,0xFFFF
           - os: ubuntu-latest
             BUILD_NAME: AngleFinderCLI_Linux
             BUILD_ARGS: -F -w --add-data "res:res" src/main.py
             CMD_EXEC: pyinstaller
             FILE_TYPE: ""
-            Z64TARGET: linux64
+            BUILD_TEST_ARGS: -g basic target_enabled -s 0x8000 0xC000 -f 0x5E19 0x5E17 -a 0xACA0,0xFFFF
     steps:
     - uses: actions/checkout@v3
       with:
@@ -52,6 +52,8 @@ jobs:
         pip install PyInstaller
     - name: Build Project for ${{ matrix.os }}
       run: ${{ matrix.CMD_EXEC }} ${{ matrix.BUILD_ARGS }} -n ${{ matrix.BUILD_NAME }} ${{ matrix.CMD_EXTRAS }}
+    - name: Test Build
+      run: dist/${{ matrix.BUILD_NAME }}${{ matrix.FILE_TYPE }} ${{ matrix.BUILD_TEST_ARGS }}
     - name: Upload Release Artifacts
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
